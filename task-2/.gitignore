@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 환경 변수
+.env
+.env.local
+.env.*.local
+
+# 업로드된 비디오 파일 (용량이 클 수 있음)
+videos/*
+!videos/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 로그
+logs/
+*.log
+ 
