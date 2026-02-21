@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영상 스트리밍 - SEADRONIX</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">SEADRONIX</div>
+        <h1>영상 스트리밍 시스템</h1>
+    </header>
+
+    <main class="container">
+        <!-- 소스 선택 섹션 -->
+        <section class="control-panel">
+            <div class="source-selector">
+                <div class="source-option">
+                    <input type="radio" id="file-source" name="source" value="file" checked>
+                    <label for="file-source">1. 영상 스트리밍 기능</label>
+                </div>
+
+                <div class="source-config" id="file-config">
+                    <div class="file-upload">
+                        <input type="file" id="video-upload" accept="video/*">
+                        <label for="video-upload" class="upload-btn">비디오 파일 선택</label>
+                        <span id="file-name"></span>
+                    </div>
+                    <select id="video-list" class="video-select">
+                        <option value="">기존 비디오 선택...</option>
+                    </select>
+                </div>
+
+                <div class="source-option">
+                    <input type="radio" id="http-source" name="source" value="http">
+                    <label for="http-source">2. HTTP 스트리밍</label>
+                </div>
+
+                <div class="source-config" id="http-config" style="display: none;">
+                    <input type="text" id="http-url" placeholder="HTTP 스트림 URL (예: https://example.com/stream.m3u8)" class="text-input">
+                    <small>HLS (.m3u8), MP4, 또는 라이브 스트림 URL을 입력하세요</small>
+                </div>
+
+                <div class="source-option">
+                    <input type="radio" id="webcam-source" name="source" value="webcam">
+                    <label for="webcam-source">3. FFmpeg 활용</label>
+                </div>
+
+                <div class="source-config" id="webcam-config" style="display: none;">
+                    <p>로컬 웹캠을 사용하여 스트리밍합니다.</p>
+                    <small>사용 가능한 카메라를 자동으로 감지합니다 (내장 카메라 우선)</small>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="start-btn" class="btn btn-primary">스트리밍 시작</button>
+                <button id="stop-btn" class="btn btn-secondary" disabled>스트리밍 중지</button>
+            </div>
+
+            <div id="status" class="status-message"></div>
+        </section>
+
+        <!-- 비디오 표시 섹션 -->
+        <section class="video-section">
+            <div class="video-container">
+                <canvas id="video-canvas"></canvas>
+                <div id="no-stream" class="no-stream">
+                    <p>스트리밍을 시작하려면 위에서 소스를 선택하고 '스트리밍 시작' 버튼을 클릭하세요</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 통계 섹션 -->
+        <section class="stats-panel">
+            <div class="stats-grid" style="margin-top: 20px;">
+                <div class="stat-item">
+                    <span class="stat-label">실시간 FPS:</span>
+                    <span class="stat-value" id="real-fps">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">지연시간:</span>
+                    <span class="stat-value" id="real-latency">0 ms</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">해상도:</span>
+                    <span class="stat-value" id="real-resolution">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">수신 프레임:</span>
+                    <span class="stat-value" id="real-frames">0</span>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
